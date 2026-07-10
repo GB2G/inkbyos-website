@@ -1,3 +1,13 @@
 .DS_Store
 .claude/
 *.log
+
+# Dependencies & build output
+node_modules/
+dist/
+dist-ssr/
+
+# Local env
+.env
+.env.local
+*.local

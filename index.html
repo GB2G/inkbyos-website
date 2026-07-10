@@ -1,167 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>InkbyOs — Tattoo Studio · Waterloo, ON</title>
-  <meta name="description" content="InkbyOs is a private tattoo studio in Waterloo, Ontario. Custom, minimalist and fine-line work matched to your story. For the love of art." />
-  <meta property="og:title" content="InkbyOs — Tattoo Studio · Waterloo, ON" />
-  <meta property="og:description" content="Custom, minimalist and fine-line tattoos matched to your story. For the love of art." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="assets/img/hero-fineline.jpg" />
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="css/style.css" />
-</head>
-<body class="has-thread">
-  <!-- The continuous thread — draws down the page as you scroll -->
-  <svg class="thread" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-    <path class="thread-path"></path>
-    <circle class="thread-tip" r="3.5" cx="-20" cy="-20"></circle>
-  </svg>
-
-  <!-- ===== Header ===== -->
-  <header class="site-header">
-    <a class="brand" href="index.html">inkbyos<span class="dot">.</span></a>
-    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">
-      <span class="nav-toggle-bar"></span>
-      <span class="nav-toggle-bar"></span>
-    </button>
-    <nav class="nav" id="primary-nav" aria-label="Primary">
-      <a href="index.html" aria-current="page">Home</a>
-      <a href="work.html">Work</a>
-      <a href="aftercare.html">Aftercare</a>
-      <a href="book.html" class="book-link">Book</a>
-    </nav>
-  </header>
-
-  <main>
-    <!-- ===== Hero ===== -->
-    <section class="hero">
-      <div class="hero-media">
-        <img src="assets/img/hero-fineline.jpg" alt="Fine-line wrist tattoos lit by a shaft of light, with the hand casting a soft shadow" />
-      </div>
-
-      <!-- Signature: a single continuous line that draws itself in -->
-      <svg class="draw-line hero-line" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M-20,80 C 240,20 380,110 620,70 S 1040,10 1240,72 S 1440,60 1470,54" />
-      </svg>
-
-      <div class="wrap hero-inner">
-        <p class="eyebrow reveal in">Waterloo, ON · Private tattoo studio</p>
-        <h1 class="display reveal in" data-delay="1">for the love<br />of <span class="em">art</span></h1>
-        <div class="hero-foot">
-          <p class="lede reveal in" data-delay="2">Custom, minimalist and fine-line work — matched to the small details that make your story your own.</p>
-          <div class="hero-cta reveal in" data-delay="3">
-            <a class="btn primary" href="book.html">Book a session <span class="arrow">→</span></a>
-            <a class="btn" href="work.html">See the work <span class="arrow">→</span></a>
-          </div>
-        </div>
-      </div>
-      <div class="scroll-hint" aria-hidden="true">Scroll</div>
-    </section>
-
-    <!-- ===== Ethos / welcome ===== -->
-    <section class="section" id="ethos">
-      <div class="wrap">
-        <div class="split narrow-left">
-          <div class="reveal">
-            <p class="eyebrow">Welcome</p>
-          </div>
-          <div class="stack reveal" data-delay="1">
-            <p class="lede">Welcome to the world of self-expression through skin art. I'm a self-taught artist with a passion for matching each client's personality with their tattoo.</p>
-            <p>Whether you arrive with an intricate abstract design or the beginning of a more minimalist idea, I'm dedicated to bringing your vision to life — a piece that represents your personal story and individuality.</p>
-            <a class="link-arrow" href="book.html">Start your piece <span aria-hidden="true">→</span></a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <hr class="rule" />
-
-    <!-- ===== About ===== -->
-    <section class="section" id="about">
-      <div class="wrap">
-        <div class="split narrow-right">
-          <div class="stack reveal">
-            <p class="eyebrow">About the artist</p>
-            <h2 class="display">the details<br />are the story</h2>
-            <p>I'm inspired by individuality — specifically, the small details that make each person's story their own. Tattooing lets me turn those stories into something lasting, and that's what makes this work so meaningful to me.</p>
-            <p>I've been tattooing on and off for years. I stepped away to pursue a steady corporate path, and kept feeling pulled back. Motivated by that pull, I've spent hours practicing and growing — and now I'm tattooing again, with a clear focus on thoughtful design, careful execution, and a client experience that's comfortable and aligned with what you need.</p>
-          </div>
-          <div class="figure portrait reveal" data-delay="1">
-            <img src="assets/img/artist.jpg" alt="Os, the artist, focused while tattooing a client under a work lamp" />
-            <span class="cap">Os · at the studio</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <hr class="rule" />
-
-    <!-- ===== Selected work teaser ===== -->
-    <section class="section" id="work">
-      <div class="wrap">
-        <div class="section-head reveal">
-          <span class="idx">01 / work</span>
-        </div>
-        <div class="split reveal" data-delay="1">
-          <div class="figure tall">
-            <img src="assets/img/gallery-fineline.jpg" alt="Delicate fine-line tattoos on a forearm" />
-            <span class="cap">Fine-line · forearm</span>
-          </div>
-          <div class="stack">
-            <h2 class="display">every piece,<br />like every person,<br />different</h2>
-            <p>Just as no two people are the same, no two pieces should be either. Browse a selection of recent work, or see the living gallery over on Instagram.</p>
-            <a class="link-arrow" href="work.html">View the gallery <span aria-hidden="true">→</span></a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- ===== CTA band ===== -->
-  <section class="section cta-band">
-    <div class="wrap reveal">
-      <p class="eyebrow" style="justify-content:center;display:flex;">Let's begin</p>
-      <h2 class="display" style="margin-top:1.4rem;">let's talk about<br />your <em>design ideas</em></h2>
-      <a class="btn primary" href="book.html">Book a session <span class="arrow">→</span></a>
-    </div>
-  </section>
-
-  <!-- ===== Footer ===== -->
-  <footer class="site-footer">
-    <div class="wrap">
-      <div class="footer-top">
-        <div class="footer-brand">
-          <p class="display">inkbyos<span style="color:var(--bronze)">.</span></p>
-          <p>For the love of art. Private, appointment-only tattooing in Waterloo, Ontario.</p>
-        </div>
-        <div class="footer-col">
-          <h4>Studio</h4>
-          <a href="work.html">Work</a>
-          <a href="aftercare.html">Aftercare</a>
-          <a href="book.html">Book a session</a>
-        </div>
-        <div class="footer-col">
-          <h4>Contact</h4>
-          <a href="mailto:inkbyos@gmail.com">inkbyos@gmail.com</a>
-          <a href="tel:+15195012910">519-501-2910</a>
-          <span>Waterloo, ON · Canada</span>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span>© <span data-year>2026</span> InkbyOs</span>
-        <span style="display:flex;gap:1.5rem;">
-          <a href="https://www.instagram.com/inkbyos" target="_blank" rel="noopener">Instagram</a>
-          <a href="https://www.tiktok.com/@inkbyos" target="_blank" rel="noopener">TikTok</a>
-          <a href="https://www.facebook.com/inkbyos" target="_blank" rel="noopener">Facebook</a>
-        </span>
-      </div>
-    </div>
-  </footer>
-
-  <script src="js/main.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="%BASE_URL%assets/favicon.svg" type="image/svg+xml" />
+    <title>InkbyOs — Tattoo Studio · Waterloo, ON</title>
+    <meta
+      name="description"
+      content="InkbyOs is a private tattoo studio in Waterloo, Ontario. Custom, minimalist and fine-line work matched to your story. For the love of art."
+    />
+    <meta property="og:title" content="InkbyOs — Tattoo Studio · Waterloo, ON" />
+    <meta property="og:description" content="Custom, minimalist and fine-line tattoos matched to your story. For the love of art." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="%BASE_URL%assets/img/hero-fineline.jpg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Single Page Apps for GitHub Pages: restore the path stashed by 404.html -->
+    <script>
+      (function (l) {
+        if (l.search[1] === '/') {
+          var decoded = l.search
+            .slice(1)
+            .split('&')
+            .map(function (s) { return s.replace(/~and~/g, '&'); })
+            .join('?');
+          window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
+        }
+      })(window.location);
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
