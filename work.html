@@ -13,9 +13,14 @@
 <body>
   <header class="site-header">
     <a class="brand" href="index.html">inkbyos<span class="dot">.</span></a>
-    <nav class="nav" aria-label="Primary">
+    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      <a href="index.html">Home</a>
       <a href="work.html" aria-current="page">Work</a>
-      <a href="aftercare.html" class="desk-only">Aftercare</a>
+      <a href="aftercare.html">Aftercare</a>
       <a href="book.html" class="book-link">Book</a>
     </nav>
   </header>

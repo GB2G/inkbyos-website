@@ -14,13 +14,24 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="css/style.css" />
 </head>
-<body>
+<body class="has-thread">
+  <!-- The continuous thread — draws down the page as you scroll -->
+  <svg class="thread" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <path class="thread-path"></path>
+    <circle class="thread-tip" r="3.5" cx="-20" cy="-20"></circle>
+  </svg>
+
   <!-- ===== Header ===== -->
   <header class="site-header">
     <a class="brand" href="index.html">inkbyos<span class="dot">.</span></a>
-    <nav class="nav" aria-label="Primary">
+    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      <a href="index.html" aria-current="page">Home</a>
       <a href="work.html">Work</a>
-      <a href="aftercare.html" class="desk-only">Aftercare</a>
+      <a href="aftercare.html">Aftercare</a>
       <a href="book.html" class="book-link">Book</a>
     </nav>
   </header>
