@@ -22,6 +22,9 @@ export function Thread() {
 
     function build() {
       if (!svg || !path) return
+      // Collapse our own height first so the absolutely-positioned SVG can't
+      // inflate document scrollHeight (which would feed back on rebuild).
+      svg.style.height = '0px'
       const W = document.documentElement.clientWidth
       const H = document.documentElement.scrollHeight
       svg.setAttribute('viewBox', `0 0 ${W} ${H}`)

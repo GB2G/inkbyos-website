@@ -478,3 +478,52 @@ body.has-thread .site-footer { position: relative; z-index: 1; }
 
 /* Hero parallax layer (JS sets transforms; this just smooths them) */
 .hero-media img, .hero-inner { will-change: transform; }
+
+/* ==========================================================================
+   Aftercare — the thread as a timeline connecting each step, and steps
+   that cascade in on scroll one by one.
+   ========================================================================== */
+.protocol { position: relative; padding-left: clamp(1.9rem, 4.5vw, 3.25rem); }
+@media (max-width: 640px) { .protocol { padding-left: 1.7rem; } }
+.protocol .step { position: relative; z-index: 1; }
+
+.step-thread {
+  position: absolute; top: 0; left: 0; width: 100%;
+  z-index: 0; pointer-events: none; overflow: visible;
+}
+.step-thread .thread-path {
+  fill: none; stroke: var(--bronze); stroke-width: 1.4;
+  vector-effect: non-scaling-stroke; opacity: 0.45;
+}
+.step-thread .thread-branch {
+  stroke: var(--bronze); stroke-width: 1.2;
+  vector-effect: non-scaling-stroke; opacity: 0.3;
+}
+.step-thread .thread-node {
+  fill: var(--ink-2); stroke: var(--bronze); stroke-width: 1.4;
+  opacity: 0.4; transition: opacity 0.5s var(--ease), fill 0.5s var(--ease);
+}
+.step-thread .thread-node.on { fill: var(--bronze); opacity: 1; }
+.step-thread .thread-tip {
+  fill: var(--bronze); filter: drop-shadow(0 0 5px rgba(199, 169, 139, 0.9));
+  transition: opacity 0.4s var(--ease);
+}
+
+/* Steps appear one by one: the box holds its place, its contents cascade in */
+.step.reveal { opacity: 1; transform: none; }
+.step.reveal .step-num,
+.step.reveal .step-body {
+  opacity: 0;
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+}
+.step.reveal .step-num { transform: translateX(-10px); }
+.step.reveal .step-body { transform: translateY(12px); transition-delay: 0.12s; }
+.step.reveal.in .step-num,
+.step.reveal.in .step-body { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .step.reveal .step-num,
+  .step.reveal .step-body { opacity: 1; transform: none; transition: none; }
+  .step-thread .thread-path { stroke-dashoffset: 0 !important; }
+  .step-thread .thread-node { opacity: 1; }
+}

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { StepThread } from '../components/StepThread'
 import { asset } from '../lib/asset'
 import { useTitle } from '../lib/useTitle'
 
@@ -32,6 +33,7 @@ export function AftercarePage() {
         {/* ===== Protocol ===== */}
         <section className="section wrap">
           <div className="protocol">
+            <StepThread />
             <article className="step reveal">
               <div className="step-num">Step 01</div>
               <div className="step-body">
