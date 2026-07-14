@@ -2,15 +2,24 @@ import { Link } from 'react-router-dom'
 import { asset } from '../lib/asset'
 import { useTitle } from '../lib/useTitle'
 
-/* To add tattoos: drop a photo in public/assets/img, then add a <figure> to
-   the `pieces` array below and remove one placeholder slot to keep the grid
-   balanced. Portrait-orientation photos look best in this masonry grid. */
+/* To add tattoos: drop a photo in public/assets/img, then add a { src, alt, cap }
+   entry to the `pieces` array below. Portrait-orientation photos look best in
+   this masonry grid. Set `emptySlots` above 0 to show "your piece here" tiles. */
 const pieces = [
-  { src: 'assets/img/gallery-fineline.jpg', alt: 'Delicate fine-line triangle and rose tattoos on a forearm in dramatic light', cap: 'Fine-line · forearm' },
-  { src: 'assets/img/studio.jpg', alt: "Os shading a colour floral piece on a client's forearm", cap: 'In progress · floral' },
-  { src: 'assets/img/artist.jpg', alt: 'Close, careful linework during a session', cap: 'At the needle · detail' },
+  { src: 'assets/img/piece-crane.jpg', alt: 'Fine-line crane in flight with red flowers and flowing linework on a forearm', cap: 'Fine-line · crane' },
+  { src: 'assets/img/piece-selflove.jpg', alt: 'Delicate "self love" typewriter script on a forearm', cap: 'Script · self love' },
+  { src: 'assets/img/piece-snake.jpg', alt: 'American traditional striking snake in green, red and yellow', cap: 'Traditional · snake' },
+  { src: 'assets/img/piece-sparkle.jpg', alt: 'Fine-line sparkle stars tattooed behind the ear', cap: 'Fine-line · behind the ear' },
+  { src: 'assets/img/piece-abstract.jpg', alt: 'Abstract black-and-red figure over a red sun', cap: 'Blackwork · abstract' },
+  { src: 'assets/img/piece-cowboy.jpg', alt: 'Fine-line skull wearing a cowboy hat', cap: 'Fine-line · cowboy' },
+  { src: 'assets/img/piece-flash.jpg', alt: 'Fine-line symbol flash — 11:11, a sun and an all-seeing eye', cap: 'Fine-line · symbols' },
+  { src: 'assets/img/piece-flower.jpg', alt: 'Traditional red flower on the wrist', cap: 'Traditional · rose' },
+  { src: 'assets/img/piece-hardway.jpg', alt: '"The hard way" lettering with a fine-line safety pin', cap: 'Lettering · the hard way' },
+  { src: 'assets/img/piece-ace.jpg', alt: 'Crown over an ace of spades in bold blackwork', cap: 'Blackwork · ace' },
+  { src: 'assets/img/piece-chess.jpg', alt: 'Black-and-grey chess pieces — a pawn beside a fallen king', cap: 'Black & grey · chess' },
+  { src: 'assets/img/gallery-fineline.jpg', alt: 'Fine-line triangle and rose tattoos on a forearm in dramatic light', cap: 'Fine-line · forearm' },
 ]
-const emptySlots = 3
+const emptySlots = 0
 
 export function WorkPage() {
   useTitle('Work — InkbyOs')

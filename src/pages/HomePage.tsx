@@ -130,10 +130,10 @@ export function HomePage() {
             <div className="split reveal" data-delay="1">
               <div className="figure tall">
                 <img
-                  src={asset('assets/img/gallery-fineline.jpg')}
-                  alt="Delicate fine-line tattoos on a forearm"
+                  src={asset('assets/img/piece-crane.jpg')}
+                  alt="Fine-line crane in flight with red flowers on a forearm"
                 />
-                <span className="cap">Fine-line · forearm</span>
+                <span className="cap">Fine-line · crane</span>
               </div>
               <div className="stack">
                 <h2 className="display">
@@ -153,6 +153,15 @@ export function HomePage() {
               </div>
             </div>
           </div>
+        </section>
+
+        {/* ===== Studio band (atmosphere) ===== */}
+        <section className="studio-band reveal" aria-label="The studio">
+          <img
+            src={asset('assets/img/studio-space.jpg')}
+            alt="The InkbyOs studio in Waterloo — tattoo bed beneath framed prints, plants and warm light"
+          />
+          <span className="studio-cap">The studio · Waterloo, ON</span>
         </section>
       </main>
 
