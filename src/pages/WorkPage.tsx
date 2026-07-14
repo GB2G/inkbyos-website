@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { asset } from '../lib/asset'
 import { useTitle } from '../lib/useTitle'
+import { VideoCarousel } from '../components/VideoCarousel'
 
 /* To add tattoos: drop a photo in public/assets/img, then add a { src, alt, cap }
    entry to the `pieces` array below. Portrait-orientation photos look best in
@@ -46,6 +47,16 @@ export function WorkPage() {
           >
             <path d="M0,40 C 160,10 260,55 440,32 S 760,8 1000,38" />
           </svg>
+        </section>
+
+        {/* ===== Motion — studio clips carousel ===== */}
+        <section className="section wrap" style={{ paddingTop: 'clamp(1rem,3vh,2rem)', paddingBottom: 0 }}>
+          <p className="eyebrow reveal in" style={{ marginBottom: '1.2rem' }}>
+            Motion · in the studio
+          </p>
+          <div className="reveal">
+            <VideoCarousel />
+          </div>
         </section>
 
         {/* ===== Gallery ===== */}

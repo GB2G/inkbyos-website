@@ -348,6 +348,43 @@ body.menu-open { overflow: hidden; }
 /* ==========================================================================
    WORK / gallery page
    ========================================================================== */
+
+/* Studio video carousel — one landscape clip at a time, on-brand hairlines */
+.vcar { position: relative; overflow: hidden; border: 1px solid var(--line); background: var(--ink-2); outline: none; }
+.vcar:focus-visible { border-color: var(--bronze); }
+.vcar-track { display: flex; transition: transform 0.7s var(--ease); will-change: transform; }
+.vcar-slide { position: relative; flex: 0 0 100%; aspect-ratio: 16 / 9; }
+.vcar-slide video {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  filter: grayscale(0.12) brightness(0.92);
+}
+.vcar-cap {
+  position: absolute; left: 1rem; bottom: 1rem;
+  font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--paper); background: rgba(12, 11, 10, 0.55); backdrop-filter: blur(6px);
+  padding: 0.4rem 0.7rem; border: 1px solid var(--line-soft);
+}
+.vcar-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 3rem; height: 3rem; border-radius: 50%;
+  border: 1px solid var(--line); background: rgba(12, 11, 10, 0.4); backdrop-filter: blur(6px);
+  color: var(--paper); font-family: var(--mono); font-size: 1rem; line-height: 1;
+  display: grid; place-items: center; cursor: pointer;
+  transition: border-color 0.3s var(--ease), color 0.3s var(--ease), background 0.3s var(--ease);
+}
+.vcar-nav:hover { border-color: var(--bronze); color: var(--bronze); background: rgba(12, 11, 10, 0.65); }
+.vcar-nav.prev { left: 1rem; }
+.vcar-nav.next { right: 1rem; }
+.vcar-dots { position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%); display: flex; gap: 0.5rem; }
+.vcar-dots button {
+  width: 8px; height: 8px; padding: 0; border-radius: 50%;
+  border: 1px solid var(--line); background: transparent; cursor: pointer;
+  transition: background 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+.vcar-dots button[aria-current="true"] { background: var(--bronze); border-color: var(--bronze); }
+@media (max-width: 600px) { .vcar-nav { width: 2.4rem; height: 2.4rem; } .vcar-nav.prev { left: 0.6rem; } .vcar-nav.next { right: 0.6rem; } }
+@media (prefers-reduced-motion: reduce) { .vcar-track { transition: none; } }
+
 .gallery {
   columns: 3 260px;
   column-gap: clamp(0.8rem, 2vw, 1.4rem);
