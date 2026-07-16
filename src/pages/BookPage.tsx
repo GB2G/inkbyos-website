@@ -1,4 +1,4 @@
-import { BookingForm } from '../components/BookingForm'
+import { BookingFlow } from '../components/BookingFlow'
 import { useTitle } from '../lib/useTitle'
 
 export function BookPage() {
@@ -20,8 +20,8 @@ export function BookPage() {
           {/* Aside */}
           <aside className="book-aside reveal">
             <p className="lede">
-              Tell me about the piece you have in mind. The more detail — placement, size, references and your
-              availability — the faster I can get back to you.
+              A few quick steps: sketch out the piece you have in mind, tell me who you are, then pick a time that
+              works. The more detail on the idea, the more prepared I'll be.
             </p>
             <ul className="meta-list">
               <li>
@@ -54,9 +54,9 @@ export function BookPage() {
             </p>
           </aside>
 
-          {/* Form */}
+          {/* Booking flow */}
           <div className="reveal" data-delay="1">
-            <BookingForm />
+            <BookingFlow />
           </div>
         </div>
       </section>
