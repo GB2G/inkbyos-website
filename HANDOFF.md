@@ -13,7 +13,7 @@ Waterloo, Ontario. Rebuilt from the client's old Wix site (inkbyos.com).
 - **Deploy:** every push to `main` runs `.github/workflows/deploy.yml` (build →
   GitHub Pages). Live ~1–2 min later. Nothing manual.
 
-## What we did this session (in order)
+## What's been done (in order)
 
 1. Scraped the old site's text + media; built the first version as a **static
    HTML/CSS/JS** site (landing, work, aftercare, book).
@@ -29,6 +29,12 @@ Waterloo, Ontario. Rebuilt from the client's old Wix site (inkbyos.com).
 7. Added **12 real client tattoo photos** to the work gallery (replacing
    placeholders) and embellished home (crane leads the teaser; new full-bleed
    **studio band**).
+8. Added a **studio video carousel** to the top of the work page (`VideoCarousel`
+   + `.vcar*` CSS). The client's 4K `.MOV` clips were transcoded to web MP4;
+   the client later cut the stencil clip, so **3 remain**.
+9. **Replaced the static booking form with a 3-step reactive flow**
+   (`BookingFlow`) ending in a live **Calendly** embed. `BookingForm.tsx` is
+   gone, and with it the mailto/Formspree path.
 
 ## Design system ("the line")
 
@@ -49,6 +55,7 @@ index.html               Vite entry (+ SPA path-restore script)
 public/
   404.html               GitHub Pages SPA fallback (pathSegmentsToKeep = 1)
   assets/img/            all photos (served as-is)
+  assets/video/          clip-1..3 .mp4 + matching .jpg posters (work carousel)
 src/
   App.tsx                routes
   main.tsx               Router + base path
@@ -58,7 +65,8 @@ src/
     Footer.tsx
     Thread.tsx           home: scroll-drawn thread + hero parallax
     StepThread.tsx       aftercare: thread timeline connecting steps
-    BookingForm.tsx      the webform
+    VideoCarousel.tsx    work: studio clips carousel
+    BookingFlow.tsx      book: 3-step flow + Calendly embed
     RouteEffects.tsx     scroll-to-top + reveal-on-scroll observer
   pages/                 HomePage / WorkPage / AftercarePage / BookPage
   lib/asset.ts           resolves /public paths against BASE_URL
@@ -90,9 +98,18 @@ Hard-refresh (Cmd+Shift+R) to beat the CDN cache after a change.
   in a feedback loop. Keep this if you touch `Thread.tsx` / `StepThread.tsx`.
 - **Home only:** `HomePage` toggles `body.has-thread` (drives z-index layering so
   the thread sits behind content). Don't remove.
-- **Booking form:** works out of the box via a `mailto:` to inkbyos@gmail.com.
-  To use a dashboard, set `FORM_ENDPOINT` in `BookingForm.tsx` to a real
-  Formspree (or similar) endpoint — then it POSTs instead.
+- **Booking:** `BookingFlow.tsx` is a 3-step flow (the idea → you → pick a time).
+  Step 3 loads Calendly's widget script and calls `initInlineWidget` with
+  `CALENDLY_URL` (`https://calendly.com/inkbyos/30min`), themed via query params
+  and **prefilled** with the visitor's name, email and brief. The brief lands in
+  `customAnswers.a1` — i.e. the **first custom question on the Calendly event**;
+  if that question is removed the brief silently won't show (nothing breaks).
+  Swap `CALENDLY_URL` to change events; if it ever contains `YOUR_CALENDLY_HANDLE`
+  the step falls back to a mailto panel instead of a broken embed.
+- **Videos:** source `.MOV`s are NOT in the repo. Re-encode new clips to match:
+  `ffmpeg -i in.MOV -vf scale=1280:-2 -c:v libx264 -crf 27 -preset slow -an
+  -movflags +faststart out.mp4` (+ a poster jpg). Keep them small — they ship
+  to GitHub Pages.
 - **prefers-reduced-motion** is respected throughout; preserve that.
 
 ## Client facts
@@ -105,13 +122,13 @@ Hard-refresh (Cmd+Shift+R) to beat the CDN cache after a change.
 
 ## Open items / not done yet
 
-- **4 client videos** (`IMG_7146/7150/7157/7158.MOV` in the client's
-  `~/Downloads/Website photos`) are NOT used — offered to work one in as a muted
-  hero/process loop; awaiting the client's call.
+- **Calendly event setup:** keep a "share anything that helps me prepare"–style
+  question **first** on the `inkbyos/30min` event so the prefilled brief has
+  somewhere to land (see the booking gotcha above).
 - **Gallery captions** in `WorkPage.tsx` are our best-guess style labels
   (e.g. "Traditional · snake"). Swap for real titles if the artist provides them.
-- **Formspree endpoint** still the `YOUR_FORM_ID` placeholder (mailto fallback
-  active).
+- **Carousel captions** in `VideoCarousel.tsx` ("The process", "Fine-line, up
+  close", "Linework") are also our guesses — swap if the artist has better ones.
 - **Custom domain (inkbyos.com):** when ready, set `base: '/'` in
   `vite.config.ts` and `pathSegmentsToKeep = 0` in `public/404.html`.
 
