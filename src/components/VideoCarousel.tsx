@@ -5,10 +5,9 @@ import { asset } from '../lib/asset'
    To swap a clip: replace the mp4 + jpg poster in public/assets/video and edit
    the matching entry below. Videos are landscape (16:9); portrait won't fit. */
 const clips = [
-  { src: 'assets/video/clip-1.mp4', poster: 'assets/video/clip-1.jpg', cap: 'In the studio' },
-  { src: 'assets/video/clip-2.mp4', poster: 'assets/video/clip-2.jpg', cap: 'The process' },
-  { src: 'assets/video/clip-3.mp4', poster: 'assets/video/clip-3.jpg', cap: 'Fine-line, up close' },
-  { src: 'assets/video/clip-4.mp4', poster: 'assets/video/clip-4.jpg', cap: 'Linework' },
+  { src: 'assets/video/clip-1.mp4', poster: 'assets/video/clip-1.jpg', cap: 'The process' },
+  { src: 'assets/video/clip-2.mp4', poster: 'assets/video/clip-2.jpg', cap: 'Fine-line, up close' },
+  { src: 'assets/video/clip-3.mp4', poster: 'assets/video/clip-3.jpg', cap: 'Linework' },
 ]
 
 export function VideoCarousel() {
