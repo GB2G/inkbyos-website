@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
+import { asset } from '../lib/asset'
 
 export function Header() {
   const [open, setOpen] = useState(false)
@@ -37,7 +38,7 @@ export function Header() {
   return (
     <header className={'site-header' + (scrolled ? ' scrolled' : '')}>
       <Link className="brand" to="/">
-        inkbyos<span className="dot">.</span>
+        <img src={asset('assets/img/logo-mark.png')} alt="InkbyOs" width={215} height={84} />
       </Link>
 
       <button

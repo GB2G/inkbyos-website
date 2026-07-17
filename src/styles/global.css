@@ -106,14 +106,8 @@ p.tight { margin-bottom: 0; }
   backdrop-filter: blur(14px) saturate(1.2);
   border-bottom-color: var(--line);
 }
-.brand {
-  font-family: var(--serif);
-  font-size: 1.6rem;
-  text-transform: lowercase;
-  letter-spacing: 0.01em;
-  line-height: 1;
-}
-.brand .dot { color: var(--bronze); }
+.brand { display: flex; align-items: center; }
+.brand img { display: block; height: 42px; width: auto; }
 .nav { display: flex; align-items: center; gap: clamp(1.2rem, 3vw, 2.6rem); }
 .nav a {
   font-family: var(--mono);
@@ -152,7 +146,7 @@ body.menu-open { overflow: hidden; }
 
 @media (max-width: 820px) {
   .site-header { gap: 1rem; }
-  .brand { font-size: 1.4rem; }
+  .brand img { height: 34px; }
   .nav-toggle { display: flex; }
 
   /* Nav becomes a full-screen overlay menu */
