@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
+import { Combobox } from './Combobox'
 
 /* ---------------------------------------------------------------------------
    Calendly
@@ -26,16 +27,13 @@ declare global {
   }
 }
 
+/* Suggestions only — every one of these is a Combobox, so a visitor can always
+   type their own answer instead. */
 const STYLES = ['Fine-line', 'Blackwork', 'Traditional', 'Script / lettering', 'Illustrative', 'Abstract', 'Not sure yet']
 const PLACEMENTS = [
-  'Forearm', 'Upper arm', 'Shoulder', 'Back', 'Chest', 'Ribs', 'Thigh', 'Calf', 'Ankle', 'Hand / finger', 'Behind ear', 'Other',
+  'Forearm', 'Upper arm', 'Shoulder', 'Back', 'Chest', 'Ribs', 'Thigh', 'Calf', 'Ankle', 'Hand / finger', 'Behind ear',
 ]
-const SIZES = [
-  { key: 'Tiny', hint: 'under 2 in' },
-  { key: 'Small', hint: '2–4 in' },
-  { key: 'Medium', hint: '4–6 in' },
-  { key: 'Large', hint: '6 in +' },
-]
+const SIZES = ['Tiny (under 2 in)', 'Small (2–4 in)', 'Medium (4–6 in)', 'Large (6 in +)', 'Not sure yet']
 
 const emailValid = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())
 
@@ -55,17 +53,14 @@ export function BookingFlow() {
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
 
-  const toggleStyle = (s: string) =>
-    setStyles((cur) => (cur.includes(s) ? cur.filter((x) => x !== s) : [...cur, s]))
-
-  const step0Valid = styles.length > 0 && design.trim().length >= 4
+  const step0Valid = styles.length > 0
   const step1Valid = first.trim() !== '' && last.trim() !== '' && emailValid(email)
 
   const brief = useMemo(() => {
     const lines = [
       styles.length ? `Styles: ${styles.join(', ')}` : '',
       placement ? `Placement: ${placement}` : '',
-      size ? `Size: ${size} (${SIZES.find((s) => s.key === size)?.hint ?? ''})` : '',
+      size ? `Size: ${size}` : '',
       firstTattoo ? `First tattoo: ${firstTattoo}` : '',
       design.trim() ? `Idea: ${design.trim()}` : '',
     ].filter(Boolean)
@@ -161,66 +156,53 @@ export function BookingFlow() {
         {/* ---------- Step 0 — the idea ---------- */}
         {step === 0 && (
           <Step>
-            <p className="fieldset-label" style={{ marginTop: 0 }}>
-              Style <span className="req">*</span>
-              <span className="hint"> — pick any that fit</span>
-            </p>
-            <div className="chips">
-              {STYLES.map((s) => (
-                <button
-                  type="button"
-                  key={s}
-                  className={`chip${styles.includes(s) ? ' selected' : ''}`}
-                  aria-pressed={styles.includes(s)}
-                  onClick={() => toggleStyle(s)}
-                >
-                  {s}
-                </button>
-              ))}
-            </div>
+            <Combobox
+              id="style"
+              label="Style"
+              hint="pick any that fit, or type your own"
+              options={STYLES}
+              values={styles}
+              onChange={setStyles}
+              multiple
+              required
+              placeholder="e.g. Fine-line"
+            />
 
-            <p className="fieldset-label">Placement</p>
-            <div className="chips">
-              {PLACEMENTS.map((p) => (
-                <button
-                  type="button"
-                  key={p}
-                  className={`chip${placement === p ? ' selected' : ''}`}
-                  aria-pressed={placement === p}
-                  onClick={() => setPlacement((cur) => (cur === p ? '' : p))}
-                >
-                  {p}
-                </button>
-              ))}
-            </div>
+            <Combobox
+              id="placement"
+              label="Placement"
+              hint="optional — type it if it's not listed"
+              options={PLACEMENTS}
+              values={placement ? [placement] : []}
+              onChange={(v) => setPlacement(v[0] ?? '')}
+              placeholder="e.g. Forearm"
+            />
 
-            <p className="fieldset-label">Approximate size</p>
-            <div className="segmented" role="group" aria-label="Approximate size">
-              {SIZES.map((s) => (
-                <button
-                  type="button"
-                  key={s.key}
-                  className={size === s.key ? 'on' : ''}
-                  aria-pressed={size === s.key}
-                  onClick={() => setSize((cur) => (cur === s.key ? '' : s.key))}
-                >
-                  <span className="seg-k">{s.key}</span>
-                  <span className="seg-h">{s.hint}</span>
-                </button>
-              ))}
-            </div>
+            <Combobox
+              id="size"
+              label="Approximate size"
+              hint="optional"
+              options={SIZES}
+              values={size ? [size] : []}
+              onChange={(v) => setSize(v[0] ?? '')}
+              placeholder="e.g. Small (2–4 in)"
+            />
 
-            <div className="field" style={{ marginTop: '1.8rem' }}>
+            <div className="field">
               <label htmlFor="design">
-                Describe your idea <span className="req">*</span>
+                Describe your idea <span className="hint">— optional, but helps me prepare</span>
               </label>
               <textarea
                 id="design"
                 rows={4}
                 value={design}
                 onChange={(e) => setDesign(e.target.value)}
-                placeholder="Subject, references, meaning — anything that helps me picture it."
+                placeholder="Subject, references, meaning — anything that helps me picture it. Not sure yet? Leave this blank."
               />
+              <p className="flow-hint">
+                Already have a reference image? You'll get the option to attach it when you pick a time, in the next
+                step.
+              </p>
             </div>
 
             <div className="flow-actions">
@@ -232,7 +214,7 @@ export function BookingFlow() {
               >
                 Continue <span className="arrow">→</span>
               </button>
-              {!step0Valid && <span className="flow-hint">Pick a style and describe your idea to continue.</span>}
+              {!step0Valid && <span className="flow-hint">Pick at least one style to continue.</span>}
             </div>
           </Step>
         )}
@@ -326,10 +308,12 @@ export function BookingFlow() {
                     <dd>{size}</dd>
                   </div>
                 )}
-                <div>
-                  <dt>Idea</dt>
-                  <dd>{design.trim()}</dd>
-                </div>
+                {design.trim() && (
+                  <div>
+                    <dt>Idea</dt>
+                    <dd>{design.trim()}</dd>
+                  </div>
+                )}
               </dl>
               <button type="button" className="link-arrow edit-brief" onClick={() => setStep(0)}>
                 Edit brief
