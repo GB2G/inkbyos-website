@@ -12,16 +12,17 @@ landing page carries a continuous "thread" that draws down the page on scroll.
 ## Tech
 
 - **Vite** (build/dev), **React 18**, **TypeScript**
-- **react-router-dom** for client-side routing, with a `public/404.html` SPA
-  fallback so deep links work on GitHub Pages
+- **react-router-dom** for client-side routing, with a `vercel.json` rewrite
+  so deep links work on refresh/direct load
 - One global stylesheet (`src/styles/global.css`) — plain CSS with design tokens
-- Deployed to **GitHub Pages** via GitHub Actions (`.github/workflows/deploy.yml`)
+- Deployed to **Vercel** — every push to `main` auto-deploys via Vercel's
+  GitHub integration. No environment variables needed.
 
 ## Local development
 
 ```bash
 npm install
-npm run dev        # http://localhost:5173/inkbyos-website/
+npm run dev        # http://localhost:5173/
 ```
 
 Other scripts:
@@ -34,9 +35,9 @@ npm run preview    # serve the production build locally
 ## Project structure
 
 ```
-index.html                 Vite entry (+ SPA path-restore script)
+index.html                 Vite entry
+vercel.json                SPA rewrite (all routes -> index.html)
 public/
-  404.html                 GitHub Pages SPA fallback
   assets/                  favicon + images (served as-is)
 src/
   main.tsx                 app bootstrap (Router + base path)
@@ -67,13 +68,18 @@ src/
 
 ## Deploy
 
-Every push to `main` triggers the GitHub Actions workflow, which builds the app
-and publishes `dist/` to GitHub Pages — live at
-<https://gb2g.github.io/inkbyos-website/> a minute or two later. No manual step.
+Hosted on **Vercel**, imported directly from this GitHub repo. Framework
+preset "Vite" auto-detects the build command and output directory — no
+extra config needed. Every push to `main` triggers an automatic build and
+deploy; no environment variables are required.
 
-**Custom domain (inkbyos.com):** point the domain at GitHub Pages, then change
-`base` in `vite.config.ts` from `'/inkbyos-website/'` to `'/'` and, in
-`public/404.html`, set `pathSegmentsToKeep = 0`.
+`vercel.json` adds a catch-all rewrite to `index.html` so client-side routes
+(`/work`, `/aftercare`, `/book`) work on direct load and refresh, not just
+through in-app navigation.
+
+**Custom domain (inkbyos.com):** `base` in `vite.config.ts` is already `'/'`
+(the app serves from the domain root), so once DNS points at Vercel, adding
+the domain is just a step in the Vercel dashboard — no code changes needed.
 
 ## Add your tattoo photos  (important)
 
@@ -121,7 +127,7 @@ ffmpeg -i in.MOV -vf scale=1280:-2 -c:v libx264 -crf 27 -preset slow \
   -an -movflags +faststart out.mp4        # + a poster jpg
 ```
 
-Keep them small — they ship to GitHub Pages. Then add/edit an entry in the
+Keep them small — they ship with every deploy. Then add/edit an entry in the
 `clips` array in `VideoCarousel.tsx`.
 
 ## Editing content

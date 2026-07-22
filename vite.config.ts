@@ -1,9 +1,8 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// Deployed to GitHub Pages under /inkbyos-website/.
-// When this moves to a custom domain (e.g. inkbyos.com), change base to '/'.
+// Deployed to Vercel, served from the domain root.
 export default defineConfig({
-  base: '/inkbyos-website/',
+  base: '/',
   plugins: [react()],
 })
